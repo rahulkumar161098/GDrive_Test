@@ -1,1 +1,35 @@
 {% extends 'base.html' %}
+
+{% block main %}
+<div class="container mt-5">
+   <div class="heading">
+      <h3>FORWARD AUCTION CATALOGUE</h3>
+   </div>
+<table class="table table-striped">
+   <thead>
+     <tr>
+       <th scope="col">AUCTION NO</th>
+       <th scope="col">DATE</th>
+       <th scope="col">AUC. TYPE</th>
+       <th scope="col">INTERESTED</th>
+       <th scope="col">Name</th>
+       <th scope="col">Price</th>
+       <th scope="col">desc..</th>
+     </tr>
+   </thead>
+   <tbody>
+      {% for items in bidData %}
+     <tr>
+       <td>{{items.id}}</td>
+       <td>{{items.bid_date}}</td>
+       <td>{{items.bid_type}}</td>
+       <td><a href="{% url 'auctionDetails' items.id  %}" type="button">Intrested</a></td>
+       <td>{{items.name}}</td>
+       <td>{{items.base_price}}</td>
+       <td>{{items.bid_desc}}</td>
+     </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+</div>
+ {% endblock %}

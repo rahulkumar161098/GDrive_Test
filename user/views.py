@@ -13,14 +13,15 @@ def home(request):
    # return HttpResponse('hello')
 
 
-def login(request):
+def user_login(request):
    if request.method== 'POST':
       u_name= request.POST['username']
       u_pass= request.POST['password']
-      user= authenticate(username=u_name, password= u_pass)
+      user= authenticate(request, username=u_name, password= u_pass)
+      print(u_name, u_pass)
       if user is not None:
          login(request, user)
-         return redirect('')
+         return redirect('home')
       else:
          messages.error(request, 'Imvalid Email Id/Password')
          return render(request, 'login.html' )
@@ -42,7 +43,7 @@ class RegisterView(View):
          save_user= User.objects.create_user(first_name=fname, last_name=lname, username=uname, password= password)
 
          save_user.save()
-         return redirect('user_log')
+         return redirect('login')
       except:
          return render(request, 'register.html')
 
