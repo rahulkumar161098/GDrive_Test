@@ -2,13 +2,32 @@
 
 {% block main %}
 <div class="container mt-5">
-   <div class="heading">
-      <h3>FORWARD AUCTION CATALOGUE</h3>
-      <p>Company Name:- {{data.name}} </p>
-      <p>Title:- {{data.name}}</p>
-      <p>Total Amount:- {{data.base_price}}</p>
-      <p>Descriptions:- {{data.bid_descw}}</p>
-      <button>BID</button>
+   <div class="row">
+      <div class="col-md-8">
+         <div class="heading">
+            <h3>FORWARD AUCTION DETAILS</h3>
+            <p>Company Name:- {{data.product_details.name}} </p>
+            <p>Title:- {{data.product_details.name}}</p>
+            <p>Bid Amount:- {{data.product_details.base_price}}</p>
+            <p>Descriptions:- {{data.product_details.bid_desc}}</p>
+            <button type="button" class="btn btn-success"><a href="/{{data.id}}/bid">BID</a></button>
+         </div>
+      </div>
+      <div class="col-md-4">
+
+         <div class="all_bid" >
+            <div class="heading" style="border: 1px solid gray; border-radius: 10px; padding: 0px 10px 10px 10px;">
+               <h3>All Bids</h3>
+               {% for bids in data.all_bids %}
+               <div class="biders" style="border-bottom: 1px solid gray; padding: 0px 10px;">
+                  <p class="m-0">Name:- <span>{{bids.name}}</span></p>
+                  <p class="m-0">Bid Amount:- <span>{{bids.bid_amount}}</span></p>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+      </div>
    </div>
 
- {% endblock %}
+
+   {% endblock %}

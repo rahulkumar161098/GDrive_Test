@@ -38,14 +38,15 @@ class RegisterView(View):
       lname= request.POST['lname']
       uname= request.POST['email']
       password= request.POST['password']
-        
       try:
          save_user= User.objects.create_user(first_name=fname, last_name=lname, username=uname, password= password)
-
          save_user.save()
-         return redirect('login')
+         return redirect('user_login')
       except:
          return render(request, 'register.html')
 
    # return render(request, 'register.html')
 
+def log_out(request):
+   logout(request)
+   return redirect('user_login')

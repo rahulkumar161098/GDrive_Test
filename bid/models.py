@@ -15,3 +15,12 @@ class CreateBid(models.Model):
 
    # def __str__(self):
    #    return self.id
+
+class CreatedUserBid(models.Model):
+   product_id= models.CharField(max_length=50)
+   user_id= models.CharField(max_length=30)
+   name= models.CharField(max_length=40)
+   phone= models.CharField(max_length=12)
+   bid_amount= models.IntegerField()
+   email= models.EmailField(max_length=50)
+   bid_msg= models.TextField()

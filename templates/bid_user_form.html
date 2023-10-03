@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container">
+<form method="POST" onsubmit="return onSubmitForm()">
+   {% csrf_token %}
+   <div class="form-group">
+     <label for="bid_name">Your Name</label>
+     <input type="text" name="bid_name" class="form-control" id="exampleFormControlInput1">
+   </div>
+   <div class="form-group">
+      <label for="bid_email">Your email</label>
+      <input type="email" name="bid_email" class="form-control" id="exampleFormControlInput1">
+    </div>
+    <div class="form-group">
+      <label for="bid_amount">Your Phone</label>
+      <input type="text" name="phone"  class="form-control" id="exampleFormControlInput1">
+    </div>
+    <div class="form-group">
+      <label for="bid_amount">Your Bid Amount</label>
+      <input type="text" name="bid_amount"  class="form-control" id="exampleFormControlInput1">
+    </div>
+   <div class="form-group">
+     <label for="bid_mgs">Your Message</label>
+     <textarea class="form-control" name="bid_msg" id="exampleFormControlTextarea1" rows="3"></textarea>
+   </div>
+   <button type="submit" class="btn btn-success">Your Bid</button>
+ </form>
+</div>
+{% endblock %}
