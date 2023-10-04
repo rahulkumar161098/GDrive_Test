@@ -6,7 +6,7 @@ from .models import CreateBid, CreatedUserBid
 def getAllAuction(request):
    try:
       alldata= CreateBid.objects.all()
-      return render(request, 'home.html', {'bidData': alldata})
+      return render(request, 'home.html', {'bidData': alldata, 'count_down':24})
    except:
       return render(request, 'home.html')
 
@@ -16,7 +16,7 @@ def auctionDetail(request, id):
       all_bids= CreatedUserBid.objects.filter(product_id=id)
       data={
          'product_details':getAuctionDetails,
-         'all_bids':all_bids
+         'all_bids':all_bids,
       }
       return render(request, 'AuctionDetails.html', {'data':data})
    except:

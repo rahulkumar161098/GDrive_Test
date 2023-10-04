@@ -12,6 +12,7 @@
        <th scope="col">DATE</th>
        <th scope="col">AUC. TYPE</th>
        <th scope="col">INTERESTED</th>
+       <th>AUCTION VALID FOR</th>
        <th scope="col">Name</th>
        <th scope="col">Price</th>
        <th scope="col">desc..</th>
@@ -23,7 +24,8 @@
        <td>{{items.id}}</td>
        <td>{{items.bid_date}}</td>
        <td>{{items.bid_type}}</td>
-       <td><a href="{% url 'auctionDetails' items.id  %}" type="button">Intrested</a></td>
+       <td><a type="button" class="btn btn-success" href="{% url 'auctionDetails' items.id  %}" >Intrested</a></td>
+       <td id="countdown-timer"></td>
        <td>{{items.name}}</td>
        <td>{{items.base_price}}</td>
        <td>{{items.bid_desc}}</td>
@@ -32,4 +34,39 @@
    </tbody>
  </table>
 </div>
+
+
+<script>
+  var countDown="{{count_down}}"
+  console.log(countDown);
+  function countdown() {
+      var endTime = new Date();
+      endTime.setHours(endTime.getHours() + countDown);  // Set the end time to 24 hours from now
+
+      function updateTimer() {
+          var currentTime = new Date();
+          var timeDifference = endTime - currentTime;
+
+          var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+          var timerDisplay = hours + 'h ' + minutes + 'm ' + seconds + 's';
+
+          document.getElementById('countdown-timer').innerHTML = timerDisplay;
+
+          if (timeDifference <= 0) {
+              clearInterval(interval);
+              document.getElementById('countdown-timer').innerHTML = 'Time\'s up!';
+              // You can also handle what happens when the time is up
+          }
+      }
+
+      updateTimer();  // Initial call to display the timer immediately
+
+      var interval = setInterval(updateTimer, 1000);  // Update every second
+  }
+
+  countdown();  // Call the countdown function to start the timer
+</script>
  {% endblock %}
