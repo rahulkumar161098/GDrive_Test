@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from .models import CreateBid, CreatedUserBid
+import uuid
 
 # Create your views here.
 
@@ -27,6 +28,10 @@ def user_bid(request, id):
    if not request.user.is_authenticated:
       return redirect ('user_login')
    user_id = request.user.id
+   # product_id= uuid.UUID(id)
+   # print(product_id)
+   bid_amount= CreatedUserBid.objects.get(id=id, flat=True)
+   print(bid_amount)
    if request.method== 'POST':
       bid_name= request.POST['bid_name']
       bid_email= request.POST['bid_email']
